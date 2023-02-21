@@ -26,8 +26,3 @@ LEFT JOIN orders o
 WHERE ws.created_at < '2012-04-14'
 	AND ws.utm_source = 'gsearch'
 	AND ws.utm_campaign = 'nonbrand';
-	
--- Next:
--- Monitor the impact of bid reductions
--- Analyze performance trending by device type in order to refine bidding strategy
-
