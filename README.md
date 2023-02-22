@@ -1,7 +1,7 @@
 We will use e-commerce website data from an online reatiler called the Maven Fuzzy Factory.
 
-## Entity Relationship Diagram
-
+### Entity Relationship Diagram
+<img width="602" alt="Maven ERD" src="https://user-images.githubusercontent.com/70214561/220702404-e4aa5230-b446-43f8-99b9-d9e06373c84a.png">
 
 ### Tables
 `website_sessions` - This table shows each website session access by users, where the traffic is coming from and which source is helping to generate the orders. Records consist of unique website session id, UTM (Urchin Tracking Module) fields, user id, and device type. UTMs tracking parameters used by Google Analytics to track paid marketing activity.
