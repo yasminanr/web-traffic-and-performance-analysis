@@ -1,4 +1,4 @@
-We will use e-commerce website data from an online reatiler called the Maven Fuzzy Factory.
+We will use e-commerce website data from an online retailer called the Maven Fuzzy Factory.
 
 ### Entity Relationship Diagram
 <img width="602" alt="Maven ERD" src="https://user-images.githubusercontent.com/70214561/220702404-e4aa5230-b446-43f8-99b9-d9e06373c84a.png">
