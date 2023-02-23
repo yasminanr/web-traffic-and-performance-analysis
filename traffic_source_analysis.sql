@@ -26,3 +26,14 @@ LEFT JOIN orders o
 WHERE ws.created_at < '2012-04-14'
 	AND ws.utm_source = 'gsearch'
 	AND ws.utm_campaign = 'nonbrand';
+
+-- Traffic Source Trending
+
+SELECT 	
+	MIN(DATE(created_at)) AS week_start_date,
+	COUNT(DISTINCT website_session_id) AS sessions_count
+FROM website_sessions 
+WHERE created_at < '2012-05-10'
+	AND utm_source = 'gsearch'
+	AND utm_campaign = 'nonbrand'
+GROUP BY WEEK(created_at);
