@@ -19,7 +19,7 @@ ORDER BY sessions_count DESC;
 SELECT
 	COUNT(DISTINCT ws.website_session_id) AS sessions_count,
 	COUNT(DISTINCT o.order_id) AS orders,
-	COUNT(DISTINCT o.order_id)/COUNT(DISTINCT ws.website_session_id) AS session_order_conv_rate
+	ROUND(100 * COUNT(DISTINCT o.order_id)/COUNT(DISTINCT ws.website_session_id), 2) AS session_order_conv_rate
 FROM website_sessions ws
 LEFT JOIN orders o 
 	USING (website_session_id)
@@ -44,7 +44,7 @@ SELECT
 	ws.device_type,
 	COUNT(DISTINCT ws.website_session_id) AS sessions_count,
 	COUNT(DISTINCT o.order_id) AS orders,
-	COUNT(DISTINCT o.order_id)/COUNT(DISTINCT ws.website_session_id) AS session_order_conv_rate
+	ROUND(100 * COUNT(DISTINCT o.order_id)/COUNT(DISTINCT ws.website_session_id), 2) AS session_order_conv_rate
 FROM website_sessions ws 
 LEFT JOIN orders o 
 	USING(website_session_id)
