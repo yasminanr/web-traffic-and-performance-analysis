@@ -28,3 +28,45 @@ FROM entry_pageview ep
 JOIN website_pageviews wp 
 	ON ep.min_pageview_id = wp.website_pageview_id
 GROUP BY landing_page;
+
+-- Calculating Bounce Rates of the Homepage
+
+WITH first_pageview AS
+(
+	SELECT 
+		website_session_id,
+		MIN(website_pageview_id) AS min_pageview_id
+	FROM website_pageviews
+	WHERE created_at < '2012-06-14'
+	GROUP BY website_session_id
+),
+sessions_landing_page AS 
+(
+	SELECT 
+		fp.website_session_id,
+		wp.pageview_url AS landing_page
+	FROM first_pageview fp
+	JOIN website_pageviews wp 
+		ON fp.min_pageview_id = wp.website_pageview_id
+	WHERE wp.pageview_url = '/home'
+),
+bounced_sessions AS 
+(
+	SELECT 	
+		sl.website_session_id,
+		sl.landing_page,
+		COUNT(wp.website_pageview_id) AS pages_viewed_count
+	FROM sessions_landing_page sl
+	JOIN website_pageviews wp 
+		USING(website_session_id)
+	GROUP BY sl.website_session_id, sl.landing_page
+	HAVING pages_viewed_count = 1
+)
+SELECT 	
+	sl.landing_page,
+	COUNT(DISTINCT sl.website_session_id) AS sessions_count,
+	COUNT(DISTINCT bs.website_session_id) AS bounced_sessions_count,
+	COUNT(DISTINCT bs.website_session_id)/COUNT(DISTINCT sl.website_session_id) AS bounce_rate
+FROM sessions_landing_page sl
+LEFT JOIN bounced_sessions bs 
+	USING (website_session_id);
