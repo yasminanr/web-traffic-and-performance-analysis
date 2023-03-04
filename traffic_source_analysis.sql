@@ -1,6 +1,8 @@
-USE mavenfuzzyfactory;
+-- TRAFFIC SOURCE ANALYSIS
 
 -- Tables used: website_sessions, website_pageviews, orders
+
+USE mavenfuzzyfactory;
 
 -- Finding Top Traffic Sources
 
