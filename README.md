@@ -11,3 +11,8 @@ We will use e-commerce website data from an online retailer called the Maven Fuz
 
 `orders` - This table shows every order made by customers. Records consist of customers' orders with order id, time when the order is created, website session id, unique user id, primary product id, count of products purchased, price in USD, and cost of goods sold (cogs) in USD.
 
+### Traffic Source Analysis
+We will use MySQL to analyze:
+- Where our traffic is coming from, hence where our customers are coming from and which channels are driving the highest quality traffic 
+- How it performs in terms of volume and conversion rates
+- How to adjust bids to optimize marketing budgets
