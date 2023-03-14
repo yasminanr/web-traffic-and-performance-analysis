@@ -19,7 +19,19 @@ We will use MySQL to analyze e-commerce website data from an online retailer cal
 <img width="1183" alt="orders" src="https://user-images.githubusercontent.com/70214561/224379204-0bafcf54-6e29-4215-a841-76b4f2092834.png">
 
 ### Traffic Source Analysis
-We will analyze:
-- Where our traffic is coming from, hence where our customers are coming from and which channels are driving the highest quality traffic 
+- Analyze where our traffic is coming from, hence where our customers are coming from and which channels are driving the highest quality traffic 
 - How it performs in terms of volume and conversion rates
 - How to adjust bids to optimize marketing budgets
+
+### Channel Portfolio Management
+- Understanding which marketing channels are driving the most sessions and orders through your website 
+- Understanding differences in user characteristics and conversion performance across marketing channels 
+- Optimizing bids and allocating marketing spend across a multi-channel portfolio to achieve maximum performance 
+- Identifying how much revenue we are generating from direct traffic - this is high margin revenue without a direct cost of customer acquisition
+- Understanding whether or not our paid traffic is generating a “halo” effect, and promoting additional direct traffic
+
+### Website Performance Analysis
+- Find the most-viewed pages that customers view on our site
+- Find the most common entry pages to our website - the first thing a user sees
+- Bouce rates comparison between landing pages
+- Analyzing test results and making recommendations on which version of landing pages we should use going forward
