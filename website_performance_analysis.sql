@@ -128,3 +128,42 @@ FROM sessions_landing_page sl
 LEFT JOIN bounced_sessions bs 
 	USING (website_session_id)
 GROUP BY sl.landing_page;
+
+-- Landing Page Trend Analysis
+
+WITH first_pageview_and_count AS
+(
+	SELECT 
+		wp.website_session_id,
+		MIN(wp.website_pageview_id) AS min_pageview_id,
+		COUNT(wp.website_pageview_id) AS pageview_count
+	FROM website_pageviews wp
+	JOIN website_sessions ws
+		USING (website_session_id)
+	WHERE wp.created_at BETWEEN '2012-06-01' AND '2012-08-31'
+		AND ws.utm_source = 'gsearch'
+		AND ws.utm_campaign = 'nonbrand'
+	GROUP BY wp.website_session_id
+),
+landing_page_count AS 
+(
+	SELECT 
+		fp.website_session_id,
+		fp.min_pageview_id,
+		fp.pageview_count,
+		wp.pageview_url AS landing_page,
+		wp.created_at AS sessions_created_at
+	FROM first_pageview_and_count fp
+	JOIN website_pageviews wp 
+		ON fp.min_pageview_id = wp.website_pageview_id 
+	WHERE wp.pageview_url IN ('/home', '/lander-1')
+)
+SELECT 	
+	MIN(DATE(sessions_created_at)) AS week_start_date,
+	COUNT(DISTINCT website_session_id) AS sessions_count,
+	COUNT(DISTINCT CASE WHEN pageview_count = 1 THEN website_session_id ELSE NULL END) AS bounced_sessions,
+	COUNT(DISTINCT CASE WHEN pageview_count = 1 THEN website_session_id ELSE NULL END)*1.0/COUNT(DISTINCT website_session_id) AS bounce_rate,
+	COUNT(DISTINCT CASE WHEN landing_page = '/home' THEN website_session_id ELSE NULL END) AS home_sessions,
+	COUNT(DISTINCT CASE WHEN landing_page = '/lander-1' THEN website_session_id ELSE NULL END) AS lander_sessions
+FROM landing_page_count
+GROUP BY YEARWEEK(sessions_created_at);
