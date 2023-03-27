@@ -37,3 +37,20 @@ LEFT JOIN orders o
 WHERE ws.created_at BETWEEN '2012-08-22' AND '2012-09-19'
 	AND utm_campaign = 'nonbrand'
 GROUP BY ws.device_type, ws.utm_source;
+
+-- Analyzing Channel Portfolio Trends
+
+SELECT 
+	MIN(DATE(created_at)) AS week_start_date,
+	COUNT(DISTINCT CASE WHEN utm_source = 'gsearch' AND device_type = 'desktop' THEN website_session_id ELSE NULL END) AS desktop_gsearch,
+	COUNT(DISTINCT CASE WHEN utm_source = 'bsearch' AND device_type = 'desktop' THEN website_session_id ELSE NULL END) AS desktop_bsearch,
+	COUNT(DISTINCT CASE WHEN utm_source = 'bsearch' AND device_type = 'desktop' THEN website_session_id ELSE NULL END)/
+		COUNT(DISTINCT CASE WHEN utm_source = 'gsearch' AND device_type = 'desktop' THEN website_session_id ELSE NULL END) AS b_g_desktop_pct,
+	COUNT(DISTINCT CASE WHEN utm_source = 'gsearch' AND device_type = 'mobile' THEN website_session_id ELSE NULL END) AS mobile_gsearch,
+	COUNT(DISTINCT CASE WHEN utm_source = 'bsearch' AND device_type = 'mobile' THEN website_session_id ELSE NULL END) AS mobile_bsearch,
+	COUNT(DISTINCT CASE WHEN utm_source = 'bsearch' AND device_type = 'mobile' THEN website_session_id ELSE NULL END)/
+		COUNT(DISTINCT CASE WHEN utm_source = 'gsearch' AND device_type = 'mobile' THEN website_session_id ELSE NULL END) AS b_g_mobile_pct
+FROM website_sessions 
+WHERE created_at BETWEEN '2012-11-04' AND '2012-12-22'
+	AND utm_campaign = 'nonbrand'
+GROUP BY WEEK(created_at);
