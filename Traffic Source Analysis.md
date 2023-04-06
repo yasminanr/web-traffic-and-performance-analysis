@@ -17,6 +17,7 @@ WHERE created_at < '2012-04-12'
 GROUP BY utm_source, utm_campaign, http_referer
 ORDER BY sessions_count DESC;
 ````
+<img width="664" alt="Screenshot 2023-04-04 at 00 52 47" src="https://user-images.githubusercontent.com/70214561/230494628-faed3a71-8ed1-48a8-9c6a-35958eb65bd4.png">
 
 #### Insights:
 - Gsearch nonbrand has the highest session count among others.
@@ -41,6 +42,8 @@ WHERE ws.created_at < '2012-04-14'
 	AND ws.utm_source = 'gsearch'
 	AND ws.utm_campaign = 'nonbrand';
 ````
+<img width="479" alt="Screenshot 2023-04-04 at 01 02 30" src="https://user-images.githubusercontent.com/70214561/230494681-a752e35b-96dd-4625-a9c7-70c79952eab1.png">
 
 #### Insights:
-- The conversion rate is 2.88%, which is less than 4%, hence we're overspending on gsearch nonbrand campaign and have to reduce bids.- Next, we will have to monitor the impact of bid reduction for the campaign.
+- The conversion rate is 2.88%, which is less than 4%, hence we're overspending on gsearch nonbrand campaign and have to reduce bids.
+- Next, we will have to monitor the impact of bid reduction for the campaign.
