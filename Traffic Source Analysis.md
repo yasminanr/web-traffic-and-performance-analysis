@@ -47,3 +47,26 @@ WHERE ws.created_at < '2012-04-14'
 #### Insights:
 - The conversion rate is 2.88%, which is less than 4%, hence we're overspending on gsearch nonbrand campaign and have to reduce bids.
 - Next, we will have to monitor the impact of bid reduction for the campaign.
+
+### CASE 3
+#### Request: TRAFFIC SOURCE TREND ANALYSIS AFTER BIDDING DOWN
+**May 12, 2012**
+<br>
+Based on the conversion rate analysis, we bid down the gsearch nonbrand on 2012-04-15. Pull the gsearch nonbrand trended session volume by week until May 5 to see if the bid changes have caused volume to drop at all.
+
+````sql
+SELECT 	
+	MIN(DATE(created_at)) AS week_start_date,
+	COUNT(DISTINCT website_session_id) AS sessions_count
+FROM website_sessions 
+WHERE created_at < '2012-05-10'
+	AND utm_source = 'gsearch'
+	AND utm_campaign = 'nonbrand'
+GROUP BY WEEK(created_at);
+````
+<img width="328" alt="Screenshot 2023-04-08 at 02 22 29" src="https://user-images.githubusercontent.com/70214561/230666147-13b4f61d-11ad-4ff1-bec6-ce2c2748c6db.png">
+
+#### Insights:
+- The sessions after April 15, 2012 have dropped, so it does look like gsearch nonbrand is sensitive to bid changes.
+- Continue to monitor session volume. 
+- We want to make campaigns more efficient by maximising volume at the lowest possible bid.
